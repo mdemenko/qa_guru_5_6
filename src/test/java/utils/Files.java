@@ -1,5 +1,6 @@
 package utils;
 
+import com.codeborne.pdftest.PDF;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
@@ -7,6 +8,7 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 
 public class Files {
 
@@ -36,5 +38,9 @@ public class Files {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static PDF getPdf(String path) throws IOException {
+        return new PDF(getFile(path));
     }
 }
