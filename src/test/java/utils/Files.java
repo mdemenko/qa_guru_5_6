@@ -2,6 +2,8 @@ package utils;
 
 import com.codeborne.pdftest.PDF;
 import com.codeborne.xlstest.XLS;
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.extractor.WordExtractor;
 import org.apache.poi.ss.usermodel.Cell;
@@ -11,6 +13,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import net.lingala.zip4j.core.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -98,5 +102,17 @@ public class Files {
         }
 
         return result;
+    }
+
+    public static void unzip(String path, String unzipPath, String password) throws ZipException {
+        ZipFile zipFile = new ZipFile(path);
+        if (zipFile.isEncrypted()) {
+            zipFile.setPassword(password);
+        }
+        zipFile.extractAll(unzipPath);
+    }
+
+    public static void unzip(String path, String unzipPath) throws ZipException {
+        unzip(path, unzipPath, "");
     }
 }
